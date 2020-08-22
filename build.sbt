@@ -21,5 +21,6 @@ lazy val appJacksonville = project.in( file("."))
   .settings(baseSettings)
   .settings(
     name := "jacksonville",
+    dockerRepository := "",
     mainClass in (Compile, run) := Some("com.biz4company.jacksonville.Server"),
   )
