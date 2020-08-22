@@ -8,13 +8,20 @@ import io.finch.{Endpoint, _}
 import io.finch.syntax._
 
 object EnvApi {
-  val api = "env" :: (ePing :+: eAdd)
+  val api = "env" :: (ePing :+: eAdd :+: eExport)
 
   def eAdd: Endpoint[EnvEntry] =
     put("add") {
       val response = EnvEntry("date", 35.5, 34.6, 1000)
       // Send to storage
       Ok(response)
+    }
+
+  def eExport: Endpoint[List[EnvEntry]] =
+    post("export") {
+      val entry = EnvEntry("date", 35.5, 34.6, 1000)
+      val responses = entry :: entry :: Nil
+      Ok(responses)
     }
 
   def ePing: Endpoint[String] =
